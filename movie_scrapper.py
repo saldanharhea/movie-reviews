@@ -8,6 +8,7 @@ from requests import request # libabry to get webpage
 from bs4 import BeautifulSoup # web scrapper library
 
 def fetch_reviews(soup,url):
+	# creating a csv file to store the reviews
 	file = csv.writer(open(movieName+".csv", 'w'))
 	file.writerow(['Author', 'Review'])
 	pagination = soup.find('span',{'class':'pageInfo'})
@@ -23,6 +24,7 @@ def fetch_reviews(soup,url):
   				theReview =reviewText.text
   			for author in review.find_all("a", {"class":"articleLink"}):
   				theAuthor =author.text
+			# writing each review to the csv file
   			file.writerow([theAuthor,theReview])
 
 		
